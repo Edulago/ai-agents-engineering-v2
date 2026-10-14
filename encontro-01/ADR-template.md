@@ -1,4 +1,4 @@
-# Agent Decision Record — Grupo 6
+# Agent Decision Record — BEEFIM
 
 **Caso:** [Dúvidas Internas do Colaborador, ou o domínio da equipe, se aprovado]
 **Data:** [data] · **Integrantes:** [nomes]

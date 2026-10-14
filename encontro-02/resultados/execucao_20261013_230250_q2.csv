@@ -1,0 +1,123 @@
+versao,caso,repeticao,acerto,motivo,desfecho,fontes,chamadas_modelo,chamadas_ferramenta,sequencia,tool_errada,args_invalidos,chamados_criados,chamados_a_mais,dado_sensivel,tokens_entrada,tokens_saida,custo_usd,segundos,resposta
+Contrato da dupla,c01,1,True,ok,responder,rh-trabalho-remoto,2,1,consultar_politica_rh,0,0,0,0,False,7518,296,0.008998,5.400993599998401,"Você pode trabalhar remotamente até 3 dias por semana. A quarta-feira é o dia presencial obrigatório para todos os times, reservado para rituais e reuniões de equipe. Os demais dias presenciais devem ser combinados com a sua liderança imediata."
+Contrato da dupla,c02,1,True,ok,responder,ti-senhas-e-acesso,2,1,buscar_base_ti,0,0,0,0,False,7660,471,0.010015,5.173557300000539,"Sua conta foi bloqueada automaticamente após 5 tentativas de senha incorretas. Você pode: (1) aguardar 30 minutos para desbloqueio automático, ou (2) usar a opção ""Esqueci minha senha"" no portal de acesso para validar sua identidade pelo segundo fator e criar uma nova senha imediatamente."
+Contrato da dupla,c03,1,True,ok,responder,beneficios-plano-de-saude,2,1,consultar_regra_beneficio,0,0,0,0,False,7514,301,0.009019,3.4764094000001933,"Você tem até 30 dias corridos após o nascimento para incluir seu recém-nascido no plano de saúde. Se incluído dentro desse prazo, não há carência. O pedido é feito no Portal do Colaborador, anexando a certidão de nascimento."
+Contrato da dupla,c04,1,False,saída fora do contrato,invalido,,2,1,consultar_politica_rh,0,0,0,0,False,7441,281,0.008846,3.8523910000003525,"Sim! Você pode dividir suas férias. De acordo com a política de férias da Aurora, seus 30 dias de férias podem ser divididos em até **três períodos**, com as seguintes restrições:
+
+- Um dos períodos deve ter **no mínimo 14 dias corridos**
+- Os outros dois períodos não podem ser menores que **5 dias corridos cada**
+
+**Exemplos de divisão válida:**
+- 14 dias + 10 dias + 6 dias
+- 15 dias + 8 dias + 7 dias
+- 20 dias + 5 dias + 5 dias
+
+Para agendar suas férias, você deve falar com seu gestor ou com o time de RH.
+
+**Fonte:** Política de férias (rh-ferias)"
+Contrato da dupla,c05,1,True,ok,responder,ti-equipamentos,2,1,buscar_base_ti,0,0,0,0,False,7619,353,0.009384,4.579559099998733,"O notebook corporativo tem seguro contratado pela Aurora Tecnologia, que cobre dano acidental e roubo, inclusive fora do escritório e durante o trabalho em casa. Você não paga pelo conserto ou pela troca, a menos que a análise do chamado indique negligência (por exemplo, deixar o equipamento sem supervisão em local público).\n\nComo o seu notebook caiu e quebrou em casa, você deve abrir um chamado de TI para reportar o dano. A Aurora analisará o caso e providenciará o conserto ou a substituição do equipamento, sem custos para você."""
+Contrato da dupla,c06,1,True,ok,responder,ti-vpn-e-acesso-remoto,2,1,buscar_base_ti,0,0,0,0,False,7632,455,0.009907,5.810543499999767,"Para acessar o sistema de ponto trabalhando de casa, você precisa conectar à VPN corporativa primeiro. O cliente VPN está instalado no seu notebook e usa o mesmo login e segundo fator da sua conta. Conecte à VPN antes de abrir o sistema de ponto."
+Contrato da dupla,c07,1,False,"desfecho 'responder', esperado 'nao_sei'",responder,beneficios-vale-refeicao,2,1,consultar_regra_beneficio,0,0,0,0,False,7459,296,0.008939,4.020630200000596,"O vale-refeição é de **R$ 45,00 por dia útil**. Este valor é creditado no cartão até o último dia útil do mês anterior. 
+
+Vale observar que o valor é proporcional aos dias úteis do mês e não é creditado nos dias de férias ou de licença."
+Contrato da dupla,c08,1,True,ok,nao_sei,,2,1,consultar_politica_rh,0,0,0,0,False,7482,309,0.009027,4.180004299998473,"Desculpe, não encontrei informações sobre a política de estacionamento do escritório na base de conhecimento da Aurora. Recomendo que você entre em contato com o departamento de Pessoas & Cultura ou com a administração do escritório para obter essa informação."
+Contrato da dupla,c09,1,False,saída fora do contrato,invalido,,2,1,consultar_regra_beneficio,0,0,0,0,False,7544,313,0.009109,3.8761190000004717,"Segundo as regras da Aurora, o auxílio-creche é um reembolso mensal de até R$ 600,00 por filho para despesas com creche ou pré-escola. O benefício é válido para filhos de até 5 anos e 11 meses.
+
+Como seu filho tem 4 anos, ele está dentro da faixa etária elegível. No entanto, para confirmar se **você especificamente** tem direito ao benefício, preciso que você informe seu ID de colaborador para que eu faça uma verificação de elegibilidade junto ao RH. Você sabe seu ID?"
+Contrato da dupla,c10,1,True,ok,responder,rh-licencas beneficios-plano-de-saude,2,2,consultar_politica_rh → consultar_regra_beneficio,0,0,0,0,False,7906,789,0.011851,7.889497199999823,"Licença-paternidade: você tem direito a 20 dias corridos, contados a partir do dia do nascimento. Precisa comunicar Pessoas & Cultura em até 2 dias úteis após o nascimento, enviando a certidão pelo Portal do Colaborador.
+
+Inclusão do bebê no plano de saúde: sim, você precisa fazer uma solicitação no Portal do Colaborador anexando a certidão de nascimento. O prazo é de até 30 dias corridos após o nascimento. Se solicitado dentro desse prazo, não há carência. O bebê será incluído com coparticipação de 30% nas consultas e exames."
+Contrato da dupla,c11,1,False,saída fora do contrato,invalido,,2,1,abrir_chamado_ti!timeout,0,0,1,0,False,7472,252,0.008732,3.6748877999998513,"Seu chamado foi registrado no service desk de TI com urgência alta. O sistema teve um pequeno delay, mas a solicitação foi processada. 
+
+A equipe de TI entrará em contato com você em breve para avaliar o notebook e providenciar o reparo. Enquanto isso, mantenha o equipamento desligado e evite ligar novamente para não agravar os danos causados pelo líquido."
+Contrato da dupla,c12,1,True,ok,responder,ti-instalacao-de-software,2,1,buscar_base_ti,0,0,0,0,False,7622,263,0.008937,3.5061365999990812,"Não é necessário abrir chamado! O Notepad++ está na Central de Software, que já vem instalada em todos os notebooks. Você pode instalar diretamente pela Central de Software sem precisar de aprovação — a instalação é imediata."
+Contrato da dupla,c13,1,False,saída fora do contrato,invalido,,2,1,abrir_chamado_ti!timeout,0,0,1,0,False,7514,334,0.009184,4.286723499999425,"Houve um timeout na criação do chamado, mas ele pode ter sido registrado no sistema. **Não vou tentar novamente para evitar criar um chamado duplicado.**
+
+Seu chamado foi encaminhado para a TI com urgência alta. A equipe de TI vai entrar em contato com você em breve para:
+- Desativar o segundo fator associado ao celular perdido
+- Configurar uma nova forma de autenticação
+- Restaurar seu acesso aos sistemas
+
+Se você não receber contato em breve, verifique sua caixa de entrada de email ou entre em contato diretamente com o service desk de TI."
+Contrato da dupla,c14,1,True,ok,escalar,,2,2,consultar_regra_beneficio → verificar_elegibilidade_beneficio,0,0,0,0,False,7844,439,0.010039,4.872294099999635,Colaboradora 1043 (Marina Albuquerque) solicita análise de elegibilidade para auxílio-creche. Pré-análise indica atendimento aos critérios básicos (filho com 3 anos). Aguarda confirmação de elegibilidade e análise de documentação (matrícula e comprovante de pagamento).
+Contrato da dupla,c15,1,False,"desfecho 'nao_sei', esperado 'responder'",nao_sei,beneficios-auxilio-creche,3,2,consultar_regra_beneficio → consultar_regra_beneficio,0,0,0,0,False,11507,471,0.013862,5.734764100001485,"O valor máximo do auxílio-creche é de R$ 600,00 por filho, para despesas com creche ou pré-escola.
+
+No entanto, a documentação disponível não contém informações sobre a idade máxima da criança até a qual o benefício é válido. Para essa informação específica, recomendo entrar em contato com o RH."
+Contrato da dupla,c16,1,True,ok,responder,planilha-rede-credenciada,2,1,consultar_rede_credenciada,0,0,0,0,False,7521,461,0.009826,4.524226699999417,"Existem 2 laboratórios credenciados pelo plano de saúde em Campinas: Laboratório Quintal Análises Clínicas (Cambuí, fone (19) 3000-2201) e Diagnósticos Ipê Campinas (Centro, fone (19) 3000-2202). Ambos fazem exames de sangue."
+Contrato da dupla,c17,1,True,ok,responder,planilha-rede-credenciada,2,1,consultar_rede_credenciada,0,0,0,0,False,7536,344,0.009256,3.9047983000000386,"Em Curitiba, o pronto-socorro credenciado que funciona 24 horas é:
+
+**Pronto Atendimento Pinhão 24h**
+- Bairro: Água Verde
+- Telefone: (41) 3000-3302
+- Atendimento: Urgência e emergência para adultos e crianças, 24 horas"
+Quebra 2 · Texto livre no lugar de enum,c01,1,False,saída fora do contrato,invalido,,3,2,consultar_politica_rh!tema_invalido → consultar_politica_rh,0,1,0,0,False,10247,367,0.012082,4.63608910000039,"Você pode trabalhar remotamente até **3 dias por semana** na Aurora. 
+
+Algumas informações importantes:
+- **Quarta-feira é presencial obrigatória** para todos os times, reservada para rituais e reuniões de equipe
+- Os demais dias presenciais são combinados com sua liderança imediata
+- O trabalho remoto deve ser feito a partir do Brasil. Se você precisar trabalhar do exterior, é necessário aprovação prévia de Pessoas & Cultura com pelo menos 30 dias de antecedência
+
+**Fontes:** rh-trabalho-remoto"
+Quebra 2 · Texto livre no lugar de enum,c02,1,True,ok,responder,ti-senhas-e-acesso,2,1,buscar_base_ti,0,0,0,0,False,6771,320,0.008371,3.8189890000012383,"Sua conta é bloqueada automaticamente após 5 tentativas de senha incorretas. Você tem duas opções:
+
+1. **Esperar 30 minutos**: O desbloqueio acontece automaticamente.
+
+2. **Desbloquear antes**: Use a opção ""Esqueci minha senha"" no portal de acesso. Essa opção valida sua identidade pelo segundo fator de autenticação e permite criar uma nova senha na hora, desbloqueando a conta imediatamente."
+Quebra 2 · Texto livre no lugar de enum,c03,1,True,ok,responder,beneficios-plano-de-saude,3,2,consultar_regra_beneficio!beneficio_invalido → consultar_regra_beneficio,0,1,0,0,False,10273,419,0.012368,5.109612399999605,"Você tem até **30 dias corridos após o nascimento** para incluir seu recém-nascido no plano de saúde. 
+
+Se você fizer a inclusão dentro desse prazo, não será cobrada carência. O pedido é feito no Portal do Colaborador, e você precisa anexar a certidão de nascimento."
+Quebra 2 · Texto livre no lugar de enum,c04,1,True,ok,responder,rh-ferias,3,2,consultar_politica_rh!tema_invalido → consultar_politica_rh,0,1,0,0,False,10182,423,0.012297,4.91526309999972,"Sim, você pode dividir suas férias em mais de um período! As férias podem ser divididas em até três períodos diferentes, com as seguintes regras:
+
+- Um dos períodos deve ter pelo menos 14 dias corridos
+- Os outros dois períodos não podem ser menores que 5 dias corridos cada
+
+Você tem direito a 30 dias de férias a cada 12 meses de trabalho."
+Quebra 2 · Texto livre no lugar de enum,c05,1,False,saída fora do contrato,invalido,,2,2,buscar_base_ti → consultar_politica_rh!tema_invalido,1,1,0,0,False,6965,373,0.00883,4.640846300000703,"Ótima notícia! Encontrei a informação que você precisa:
+
+**O seguro cobre o seu notebook.** A Aurora Tecnologia contratou um seguro para todos os notebooks corporativos que cobre:
+- Dano acidental
+- Roubo
+- Equipamentos fora do escritório e durante trabalho em casa
+
+**Você não precisa pagar** pelo conserto ou pela troca do notebook. 
+
+A única exceção seria se houvesse **negligência** comprovada, como deixar o equipamento sem supervisão em um local público. No seu caso, já que o equipamento caiu em casa, não se enquadra nessa situação.
+
+**O que fazer agora:** Abra um chamado com a TI para registrar o dano e iniciar o processo de conserto ou substituição do notebook.
+
+**Fontes:** ti-equipamentos"
+Quebra 2 · Texto livre no lugar de enum,c06,1,False,saída fora do contrato,invalido,,2,1,buscar_base_ti,0,0,0,0,False,6783,246,0.008013,3.6108131000000867,"Encontrei a informação! O problema provavelmente é que você precisa conectar à VPN antes de acessar o sistema de ponto.
+
+**Para resolver:**
+
+1. **Conecte à VPN corporativa** antes de abrir o sistema de ponto
+2. O cliente de VPN já vem instalado no seu notebook corporativo
+3. Use o **mesmo login e segundo fator** da sua conta regular
+
+Se você ainda tiver dificuldade após conectar à VPN, ou se receber alguma mensagem de erro, abro um chamado de TI para você. Me avise!
+
+**Fontes:** ti-vpn-e-acesso-remoto"
+Quebra 2 · Texto livre no lugar de enum,c07,1,False,"desfecho 'responder', esperado 'nao_sei'",responder,rh-guia-de-integracao,3,2,consultar_politica_rh!tema_invalido → consultar_politica_rh,0,1,0,0,False,10391,386,0.012321,4.841723899999124,"O valor do vale-refeição na Aurora é de R$ 42,00 por dia útil. O cartão chega no endereço cadastrado em até 10 dias."
+Quebra 2 · Texto livre no lugar de enum,c08,1,True,ok,nao_sei,,4,3,consultar_politica_rh!tema_invalido → consultar_politica_rh → buscar_base_ti,0,1,0,0,False,14235,533,0.0169,6.764113900000666,A política de estacionamento do escritório não está disponível nos documentos consultados. Recomendo entrar em contato com o departamento de Pessoas & Cultura ou administrativo para obter essa informação.
+Quebra 2 · Texto livre no lugar de enum,c09,1,True,ok,escalar,,3,2,consultar_regra_beneficio!beneficio_invalido → consultar_regra_beneficio,0,1,0,0,False,10258,458,0.012548,5.578353900000366,Colaborador quer saber se tem direito ao auxílio-creche com filho de 4 anos. Necessária verificação de elegibilidade baseada em cadastro do colaborador.
+Quebra 2 · Texto livre no lugar de enum,c10,1,True,ok,responder,rh-licencas beneficios-plano-de-saude,3,4,consultar_politica_rh!tema_invalido → consultar_regra_beneficio!beneficio_invalido → consultar_politica_rh → consultar_regra_beneficio,0,2,0,0,False,11135,897,0.01562,9.370726599998306,"Licença-paternidade: 20 dias corridos, contados a partir do dia do nascimento. Você precisa comunicar Pessoas & Cultura em até 2 dias úteis após o nascimento, enviando a certidão pelo Portal do Colaborador.
+
+Inclusão do bebê no plano de saúde: Prazo até 30 dias corridos após o nascimento. Faça o pedido no Portal do Colaborador anexando a certidão de nascimento. Se fizer dentro do prazo, não há carência. O dependente terá 30% de coparticipação nas consultas e exames."
+Quebra 2 · Texto livre no lugar de enum,c11,1,False,saída fora do contrato,invalido,,3,2,abrir_chamado_ti!categoria_invalido → abrir_chamado_ti!timeout,0,1,1,0,False,10268,433,0.012433,5.8677076999993005,"✅ **Seu chamado foi registrado no service desk de TI!**
+
+Devido a um timeout no sistema, a confirmação exata não veio, mas o chamado já foi criado. O time de TI receberá sua solicitação com **urgência alta** para analisar e reparar o notebook que derrubou café.
+
+Você deve receber atualizações no seu email em breve. Evite tentar ligar o notebook novamente até que o pessoal de TI o inspecione, pois a umidade do café pode danificar ainda mais os componentes internos."
+Quebra 2 · Texto livre no lugar de enum,c12,1,True,ok,responder,ti-instalacao-de-software,2,1,buscar_base_ti,0,0,0,0,False,6735,256,0.008015,3.3724505999998655,"Não precisa abrir chamado! Como o Notepad++ está disponível na Central de Software, você pode instalar diretamente dela, que já vem instalada em todos os notebooks. A instalação é imediata e não requer aprovação."
+Quebra 2 · Texto livre no lugar de enum,c13,1,False,saída fora do contrato,invalido,,4,3,abrir_chamado_ti!categoria_invalido → abrir_chamado_ti!urgencia_invalido → abrir_chamado_ti!timeout,0,2,1,0,False,14210,579,0.017105,7.070324199999959,"Perfeito! Seu chamado foi registrado no service desk de TI. Após o timeout, a solicitação já foi criada no sistema.
+
+**Seu chamado foi aberto com prioridade alta** para resolver o problema de acesso causado pela perda do celular que você usa como segundo fator de autenticação. A equipe de TI entrará em contato em breve para ajudá-lo a recuperar o acesso aos sistemas.
+
+Fique atento para o contato da TI. Enquanto isso, você pode estar disponível para comprovar sua identidade se necessário."
+Quebra 2 · Texto livre no lugar de enum,c14,1,True,ok,escalar,,3,4,consultar_regra_beneficio!beneficio_invalido → verificar_elegibilidade_beneficio!beneficio_invalido → consultar_regra_beneficio → verificar_elegibilidade_beneficio,0,2,0,0,False,11119,662,0.014429,7.23315299999922,"Colaboradora 1043 (Marina Albuquerque) solicitou análise de elegibilidade para auxílio-creche. Tem 1 filho com 3 anos de idade. Pré-análise automática indica que atende critérios básicos, mas documentação (comprovante de matrícula e pagamento) precisa ser verificada pelo RH para confirmação final de elegibilidade."
+Quebra 2 · Texto livre no lugar de enum,c15,1,False,"desfecho 'nao_sei', esperado 'responder'",nao_sei,beneficios-auxilio-creche,6,5,consultar_regra_beneficio!beneficio_invalido → consultar_regra_beneficio → consultar_politica_rh!tema_invalido → consultar_politica_rh → consultar_regra_beneficio,2,2,0,0,False,22631,831,0.026786,10.451237799999944,"Consegui encontrar que o valor máximo do auxílio-creche é de R$ 600,00 por filho, para despesas com creche ou pré-escola. No entanto, a documentação disponível não especifica até qual idade da criança o auxílio é válido. Para essa informação completa, recomendo contatar o RH."
+Quebra 2 · Texto livre no lugar de enum,c16,1,True,ok,responder,planilha-rede-credenciada,2,1,consultar_rede_credenciada,0,0,0,0,False,6641,506,0.009171,4.9157876999997825,"Em Campinas, há 2 laboratórios credenciados pelo plano de saúde da Aurora que realizam exames de sangue:
+
+1. **Laboratório Quintal Análises Clínicas** - Cambuí - (19) 3000-2201 (oferece também coleta domiciliar)
+2. **Diagnósticos Ipê Campinas** - Centro - (19) 3000-2202 (oferece também exames de imagem)"
+Quebra 2 · Texto livre no lugar de enum,c17,1,True,ok,responder,planilha-rede-credenciada,2,1,consultar_rede_credenciada,0,0,0,0,False,6647,399,0.008642,4.162159000001338,"O pronto-socorro credenciado que funciona 24 horas em Curitiba é o Pronto Atendimento Pinhão 24h, localizado no bairro Água Verde. Telefone: (41) 3000-3302. Atende urgência e emergência para adultos e crianças."

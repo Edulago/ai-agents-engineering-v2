@@ -81,17 +81,73 @@ def normalizar(texto: str) -> str:
 #   3. filtrar (normalizar() ajuda)
 #   4. devolver {"resultados": [...], ...}
 # ======================================================================
-def consultar_rede_credenciada(cidade: str) -> dict:
-    raise NotImplementedError("TODO 4a: implemente consultar_rede_credenciada em nova_ferramenta.py")
+MAX_RESULTADOS = 5
+
+
+def consultar_rede_credenciada(cidade: str, tipo: str | None = None, apenas_24h: bool = False) -> dict:
+    cabecalho, *linhas = SHEETS.ler(PLANILHA_ID, ABA)["values"]
+    prestadores = [dict(zip(cabecalho, linha)) for linha in linhas]
+
+    resultados = []
+    for p in prestadores:
+        if normalizar(p["situacao"]) != "ativo":   # descredenciado e em negociação não saem daqui
+            continue
+        if normalizar(p["cidade"]) != normalizar(cidade):
+            continue
+        if tipo and normalizar(p["tipo"]) != normalizar(tipo):
+            continue
+        atende_24h = normalizar(p["atende_24h"]) == "sim"
+        if apenas_24h and not atende_24h:
+            continue
+        # só o que o colaborador pode ver: valor negociado, observação interna e código ficam de fora
+        resultados.append({
+            "prestador": p["prestador"],
+            "tipo": p["tipo"],
+            "especialidades": p["especialidades"],
+            "bairro": p["bairro"],
+            "telefone": p["telefone"],
+            "atende_24h": atende_24h,
+        })
+
+    saida = {"id": PLANILHA_ID, "total_encontrados": len(resultados),
+             "resultados": resultados[:MAX_RESULTADOS]}
+    if len(resultados) > MAX_RESULTADOS:   # o corte não pode ser invisível para o modelo
+        saida["aviso"] = (f"Mostrando {MAX_RESULTADOS} de {len(resultados)} prestadores. "
+                          "Para ver os demais, refine a busca por tipo ou por apenas_24h.")
+    return saida
+
 
 
 # ======================================================================
 # TODO 4b — o contrato (mesmo formato de contratos.py)
 # ======================================================================
 CONTRATO = {
-    "descricao": "TODO 4",
-    "parametros": None,
-    "saida": None,
+    "descricao": (
+        "Consulta a planilha da rede credenciada do plano de saúde da Aurora e devolve até 5 prestadores "
+        "ativos de uma cidade: nome, tipo, especialidades, bairro, telefone e se atende 24 horas. "
+        "Use quando o colaborador perguntar qual hospital, laboratório, clínica ou pronto-socorro atende "
+        "pelo plano. Prestadores descredenciados ou em negociação não aparecem: indique só os que voltarem. "
+        "Quando tiver o que precisa, encerre o atendimento pela ferramenta responder, com o valor do "
+        "campo 'id' em fontes; nunca responda em texto livre. "
+        "O campo 'total_encontrados' diz quantos prestadores atendem ao filtro; se vier um 'aviso' de "
+        "lista cortada, refine por tipo ou por apenas_24h antes de dizer que não há outras opções. "
+        "Não use para regras do plano de saúde (carência, inclusão de dependentes, coparticipação, valores): "
+        "isso é consultar_regra_beneficio."
+    ),
+    "parametros": {
+        "type": "object",
+        "properties": {
+            "cidade": {"type": "string", "maxLength": 60,
+                       "description": "Cidade onde o colaborador quer ser atendido. Ex.: 'Campinas'."},
+            "tipo": {"type": "string", "enum": ["hospital", "laboratorio", "clinica", "pronto-socorro"],
+                     "description": "Tipo de prestador. Omita para trazer todos os tipos da cidade."},
+            "apenas_24h": {"type": "boolean",
+                           "description": "true para trazer só prestadores que atendem 24 horas."},
+        },
+        "required": ["cidade"],
+        "additionalProperties": False,
+    },
+    "saida": ["id", "total_encontrados", "aviso", "prestador", "tipo", "especialidades", "bairro", "telefone", "atende_24h"],
 }
 
 
@@ -99,5 +155,7 @@ NOME = "consultar_rede_credenciada"
 
 
 if __name__ == "__main__":   # olhar os dados antes de escrever a ferramenta
-    for linha in SHEETS.ler(PLANILHA_ID, ABA)["values"]:
-        print(linha)
+    # for linha in SHEETS.ler(PLANILHA_ID, ABA)["values"]:
+        # print(linha)
+
+    print(consultar_rede_credenciada("São Paulo"))

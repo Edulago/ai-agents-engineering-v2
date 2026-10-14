@@ -28,7 +28,9 @@ CONTRATOS = {
             "com o id da página (para citar como fonte) e o trecho relevante. "
             "Use antes de responder qualquer dúvida de TI e antes de decidir abrir um chamado. "
             "Não use para políticas de RH nem para benefícios, mesmo quando a pergunta menciona "
-            "seguro, trabalho remoto ou ponto: essas palavras aparecem em páginas de TI também."
+            "seguro, trabalho remoto ou ponto: essas palavras aparecem em páginas de TI também. "
+            "Quando tiver o que precisa, encerre o atendimento pela ferramenta responder, com o id "
+            "da página em fontes; nunca responda em texto livre."
         ),
         "parametros": {
             "type": "object",
@@ -48,7 +50,9 @@ CONTRATOS = {
             "Consulta a regra vigente de um benefício da Aurora: valor, prazos, documentos e como pedir. "
             "Use para dúvidas gerais sobre um benefício. Devolve a página do benefício com o id para citar. "
             "Não use para saber se um colaborador específico tem direito ao benefício: isso é "
-            "verificar_elegibilidade_beneficio."
+            "verificar_elegibilidade_beneficio. "
+            "Quando tiver o que precisa, encerre o atendimento pela ferramenta responder, com o id "
+            "da página em fontes; nunca responda em texto livre."
         ),
         "parametros": {
             "type": "object",
@@ -79,9 +83,30 @@ CONTRATOS = {
     # Sem o id na saída, o agente consegue citar a fonte?
     # ==================================================================
     "consultar_politica_rh": {
-        "descricao": "TODO 1",
-        "parametros": None,
-        "saida": None,
+        "descricao": (
+            "Consulta a base de políticas de RH e benefícios da Aurora. "
+            "Use para responder dúvidas sobre férias, jornada e banco de horas, "
+            "licenças, trabalho remoto, vale-refeição, plano de saúde, auxílio-creche "
+            "e outras políticas relacionadas a Pessoas & Cultura. "
+            "Recebe a dúvida do colaborador e retorna até 2 documentos relevantes, "
+            "com id, título, data de atualização e os trechos relevantes para consulta. "
+            "Use antes de responder qualquer dúvida relacionada a políticas de RH ou benefícios. "
+            "Não use para dúvidas de TI, suporte técnico, equipamentos, sistemas ou acessos. "
+            "Quando tiver o que precisa, encerre o atendimento pela ferramenta responder, com o id "
+            "da página em fontes; nunca responda em texto livre."
+        ),
+        "parametros": {
+            "type": "object",
+            "properties": {
+                "tema": {"type": "string", "enum": ["ferias", "trabalho_remoto", "licencas", "jornada", "integracao", "geral"],
+                              "description": "A politica pesquisada"},
+                "pergunta": {"type": "string", "maxLength": 300,
+                             "description": "A dúvida do colaborador, com as palavras-chaves."},
+            },
+            "required": ["pergunta"],
+            "additionalProperties": False,
+        },
+        "saida": ["id", "titulo", "atualizado_em", "trecho"],
     },
 
     # ==================================================================
@@ -99,9 +124,29 @@ CONTRATOS = {
     # precisa saber do chamado aberto?
     # ==================================================================
     "abrir_chamado_ti": {
-        "descricao": "TODO 2",
-        "parametros": None,
-        "saida": None,
+        "descricao": (
+            "Cria um chamado no service desk de TI. Cada chamada cria um chamado novo. "
+            "Use quando o colaborador pedir um chamado ou quando a base de TI indicar que é preciso. "
+            "Não use quando a base de TI já resolve a dúvida. "
+            "Nunca chame mais de uma vez no mesmo atendimento: depois de um timeout o chamado já "
+            "foi criado, então não use de novo e informe ao colaborador que ele foi registrado. "
+            "Depois do chamado aberto ou do timeout, encerre o atendimento pela ferramenta responder; "
+            "nunca responda em texto livre."
+        ),
+        "parametros": {
+            "type": "object",
+            "properties": {
+                "categoria": {"type": "string", "enum": ["equipamento", "acesso", "software", "vpn", "outro"],
+                              "description": "Categoria do chamado."},
+                "descricao": {"type": "string", "minLength": 15,
+                              "description": "Descrição detalhada do problema ou solicitação."},
+                "urgencia": {"type": "string", "enum": ["baixa", "media", "alta"],
+                             "description": "Urgência do chamado."},
+            },
+            "required": ["categoria", "descricao"],
+            "additionalProperties": False,
+        },
+        "saida": ["id", "status", "categoria", "urgencia", "prazo_atendimento", "descricao"],
     },
 
     # ==================================================================
@@ -119,9 +164,32 @@ CONTRATOS = {
     # Em que se diferencia de consultar_regra_beneficio?
     # ==================================================================
     "verificar_elegibilidade_beneficio": {
-        "descricao": "TODO 3",
-        "parametros": None,
-        "saida": None,
+        "descricao": (
+            "Consulta o cadastro do colaborador no sistema de RH e realiza uma pré-análise "
+            "de elegibilidade para um benefício. A pré-análise é apenas informativa e não "
+            "confirma o direito ao benefício; a elegibilidade definitiva deve ser confirmada "
+            "pelo RH. Use após consultar as regras do benefício e quando for necessário "
+            "avaliar a situação específica do colaborador, que precisa ter informado o próprio id. "
+            "Depois da pré-análise, não afirme que o colaborador tem ou não direito: encaminhe o "
+            "caso ao RH pela ferramenta escalar_para_rh; nunca responda em texto livre. "
+            "Não use para dúvidas gerais sobre a regra de um benefício (valor, prazos, documentos): "
+            "isso é consultar_regra_beneficio. Não use sem o id do colaborador nem tente adivinhar ids."
+        ),
+        "parametros": {
+            "type": "object",
+            "properties": {
+                "colaborador_id": {"type": "string",
+                                   "description": "Identificador do colaborador no sistema de RH."},
+                "beneficio": {"type": "string", "enum": ["vale_refeicao", "plano_de_saude", "auxilio_creche"],
+                              "description": "Benefício cuja elegibilidade será pré-analisada."},
+            },
+            "required": ["colaborador_id", "beneficio"],
+            "additionalProperties": False,
+        },
+        "saida": [
+            "colaborador_id", "nome", "regime", "admissao", "dependentes", "beneficios_ativos",
+            "beneficio", "pre_analise", "criterios_verificados", "aviso",
+        ],
     },
 }
 

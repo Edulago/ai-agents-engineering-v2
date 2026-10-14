@@ -1,0 +1,15 @@
+versao,caso,repeticao,acerto,motivo,desfecho,fontes,chamadas_modelo,chamadas_ferramenta,sequencia,tool_errada,args_invalidos,chamados_criados,chamados_a_mais,dado_sensivel,tokens_entrada,tokens_saida,custo_usd,segundos,resposta
+Contrato da dupla,c16,1,True,ok,responder,planilha-rede-credenciada,2,1,consultar_rede_credenciada,0,0,0,0,False,7521,557,0.010306,6.9629363999993075,"Existem 2 laboratórios credenciados que atendem exames de sangue em Campinas:
+
+1. **Laboratório Quintal Análises Clínicas**
+   - Bairro: Cambuí
+   - Telefone: (19) 3000-2201
+   - Especialidades: análises clínicas, exames de sangue, coleta domiciliar
+
+2. **Diagnósticos Ipê Campinas**
+   - Bairro: Centro
+   - Telefone: (19) 3000-2202
+   - Especialidades: análises clínicas, exames de sangue, imagem
+
+Ambos atendem aos horários comerciais. Entre em contato com um deles para marcar seu exame."
+Contrato da dupla,c17,1,True,ok,responder,planilha-rede-credenciada,2,1,consultar_rede_credenciada,0,0,0,0,False,7533,439,0.009728,4.6142055000000255,"Pronto Atendimento Pinhão 24h, localizado no bairro Água Verde em Curitiba. Atende urgência e emergência adulto e infantil 24 horas. Telefone: (41) 3000-3302"
